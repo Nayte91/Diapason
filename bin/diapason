@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+(static function (): void {
+    foreach ([__DIR__.'/../vendor/autoload.php', __DIR__.'/../../../autoload.php'] as $a) {
+        if (is_file($a)) {
+            require $a;
+            (new Diapason\Application())->run();
+            return;
+        }
+    }
+    fwrite(STDERR, "Diapason: composer autoload not found\n");
+    exit(2);
+})();

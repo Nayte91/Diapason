@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  rector:
+    name: Rector (dry-run)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, libxml
+          coverage: none
+      - run: composer install --prefer-dist --no-progress --no-interaction
+      - run: vendor/bin/rector process --dry-run --no-progress-bar
+
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    needs: rector
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, libxml
+          coverage: none
+      - run: composer install --prefer-dist --no-progress --no-interaction
+      - run: composer lint
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    needs: php-cs-fixer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, libxml
+          coverage: none
+      - run: composer install --prefer-dist --no-progress --no-interaction
+      - run: composer static
+
+  phpunit:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    needs: phpstan
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, libxml
+          coverage: none
+      - run: composer install --prefer-dist --no-progress --no-interaction
+      - run: composer test

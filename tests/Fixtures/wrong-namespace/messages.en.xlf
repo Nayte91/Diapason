@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" srcLang="en">
+	<file original="x" datatype="plaintext" source-language="en">
+		<body>
+			<trans-unit id="account.login">
+				<source>Login</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

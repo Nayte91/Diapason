@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+	<file id="messages">
+		<group id="account">
+			<unit id="account.login">
+				<segment>
+					<source>Login</source>
+				</segment>
+			</unit>
+
+			<unit id="account.logout">
+				<segment>
+					<source>Logout</source>
+				</segment>
+			</unit>
+		</group>
+	</file>
+</xliff>
